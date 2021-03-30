@@ -24,7 +24,7 @@ class User extends Authenticatable
 
   protected $with = ['interventions'];
 
-  public function paths()
+  public function interventions()
   {
     return $this->hasMany(Intervention::class);
   }

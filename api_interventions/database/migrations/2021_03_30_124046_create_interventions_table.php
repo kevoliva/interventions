@@ -15,8 +15,8 @@ class CreateInterventionsTable extends Migration
     {
         Schema::create('interventions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('technicien_id');
-            $table->foreign('technicien_id')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
             ->references('id')->on('users')
             ->onDelete('cascade');
             $table->string('nomClient');

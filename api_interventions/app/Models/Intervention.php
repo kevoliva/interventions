@@ -10,13 +10,13 @@ class Intervention extends Model
     use HasFactory;
 
     protected $fillable = [
-    'technicien_id', 'nomClient', 'prenomClient', 'adresseClient',
+    'user_id', 'nomClient', 'prenomClient', 'adresseClient',
     'marqueChaudiere', 'modeleChaudiere', 'dateMiseEnService',
     'dateIntervention', 'numeroSerie', 'description', 'tempsPasse'
 ];
 
 public function users()
 {
-    return $this->belongsTo(User::class, 'technicien_id');
+    return $this->belongsTo(User::class, 'user_id');
 }
 }
