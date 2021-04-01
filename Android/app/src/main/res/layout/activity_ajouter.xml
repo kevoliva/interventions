@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fond"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/nouvelleIntervention"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="25dp"
+        android:text="Nouvelle intervention"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
+    <EditText
+        android:id="@+id/nomPrenomClient"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Nom et prénom du client"
+        android:inputType="textPersonName"
+        android:padding="5dip"
+        android:selectAllOnFocus="true"
+        android:singleLine="false"
+        android:textColor="#FFFFFF" />
+
+    <EditText
+        android:id="@+id/adresseClient"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Adresse du client"
+        android:inputType="textEmailAddress"
+        android:padding="5dip" />
+
+    <EditText
+        android:id="@+id/marqueChaudiere"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Marque de la chaudière"
+        android:inputType="textPersonName"
+        android:padding="5dip" />
+
+    <EditText
+        android:id="@+id/modeleChaudiere"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Modèle de la chaudière"
+        android:inputType="textPersonName"
+        android:padding="5dip" />
+
+    <EditText
+        android:id="@+id/dateMiseService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Date de mise en service"
+        android:inputType="date"
+        android:padding="5dip" />
+
+    <EditText
+        android:id="@+id/dateIntervention"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Date de l'intervention"
+        android:inputType="date"
+        android:padding="5dip" />
+
+    <EditText
+        android:id="@+id/numeroSerie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Numéro de série"
+        android:inputType="number"
+        android:padding="5dip" />
+
+    <EditText
+        android:id="@+id/tempsPasse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Temps passé (en minutes)"
+        android:inputType="number"
+        android:padding="5dip" />
+
+    <EditText
+        android:id="@+id/descriptionIntervention"
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:breakStrategy="balanced"
+        android:fitsSystemWindows="true"
+        android:gravity="top"
+        android:hint="Description de l'intervention"
+        android:inputType="textMultiLine"
+        android:padding="5dp"
+        android:background="@drawable/rounded_edittext"
+        android:singleLine="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:elevation="4dp"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:text="Enregistrer"
+
+        app:rippleColor="#FFFFFF" />
+</LinearLayout>

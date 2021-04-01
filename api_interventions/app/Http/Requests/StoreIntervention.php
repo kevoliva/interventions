@@ -24,7 +24,7 @@ class StoreIntervention extends FormRequest
     public function rules()
     {
         return [
-            'technicien_id' => 'required|integer|exists:users,id',
+            'user_id' => 'required|integer|exists:users,id',
             'nomClient' => 'required|string|max:150',
             'prenomClient' => 'required|string|max:150',
             'adresseClient' => 'required|string|max:255',

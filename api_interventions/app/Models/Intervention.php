@@ -10,7 +10,7 @@ class Intervention extends Model
     use HasFactory;
 
     protected $fillable = [
-    'user_id', 'nomClient', 'prenomClient', 'adresseClient',
+    'id', 'user_id', 'nomClient', 'prenomClient', 'adresseClient',
     'marqueChaudiere', 'modeleChaudiere', 'dateMiseEnService',
     'dateIntervention', 'numeroSerie', 'description', 'tempsPasse'
 ];
