@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fond"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".AjouterActivity">
 
     <TextView
         android:id="@+id/nouvelleIntervention"
@@ -20,17 +22,35 @@
         android:textStyle="bold"
         android:typeface="normal" />
 
-    <EditText
-        android:id="@+id/nomPrenomClient"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edittext"
-        android:hint="Nom et prénom du client"
-        android:inputType="textPersonName"
-        android:padding="5dip"
-        android:selectAllOnFocus="true"
-        android:singleLine="false"
-        android:textColor="#FFFFFF" />
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/nomClient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Nom du client"
+            android:inputType="textPersonName"
+            android:padding="5dip"
+            android:selectAllOnFocus="true"
+            android:singleLine="false" />
+
+        <EditText
+            android:id="@+id/prenomClient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="110dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Prénom du client"
+            android:inputType="textPersonName"
+            android:padding="5dip"
+            android:selectAllOnFocus="true"
+            android:singleLine="false" />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/adresseClient"
@@ -50,7 +70,7 @@
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="Marque de la chaudière"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:padding="5dip" />
 
     <EditText
@@ -61,7 +81,7 @@
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="Modèle de la chaudière"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:padding="5dip" />
 
     <EditText
@@ -94,7 +114,7 @@
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="Numéro de série"
-        android:inputType="number"
+        android:inputType="text"
         android:padding="5dip" />
 
     <EditText
@@ -124,13 +144,14 @@
         android:singleLine="false" />
 
     <Button
+        android:id="@+id/enregistrerIntervention"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:elevation="4dp"
         android:paddingLeft="70dp"
         android:paddingRight="70dp"
-        android:text="Enregistrer"
 
+        android:text="Enregistrer"
         app:rippleColor="#FFFFFF" />
 </LinearLayout>
