@@ -25,6 +25,7 @@ public class DataActivity extends AppCompatActivity implements com.example.inter
     private ArrayList<Intervention> interventionList, interventionListNonEnvoyees;
     com.example.intervention.DataAdapter.InterventionListAdapter adapter;
     private InterventionManager interventionmanager;
+    private int compteur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,6 @@ public class DataActivity extends AppCompatActivity implements com.example.inter
 
         // On récupère la liste des interventions contenues dans la table Intervention
         interventionList = interventionmanager.getInterventions();
-        interventionListNonEnvoyees = interventionmanager.getInterventionsNonEnvoyees();
 
         // on ferme la connexion
         interventionmanager.close();
@@ -75,19 +75,31 @@ public class DataActivity extends AppCompatActivity implements com.example.inter
         mbuttonSendInterventions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                compteur = 0;
                 interventionmanager.open();
 
-                for(int i = 0 ; i < interventionListNonEnvoyees.size(); i++) {
-                    Log.d("OK", String.valueOf(interventionListNonEnvoyees.get(i).isEstEnvoye()));
+                for(int i = 0 ; i < interventionList.size(); i++) {
 
-                    AsyncPostJSONData task = new AsyncPostJSONData(interventionListNonEnvoyees.get(i).getMap());
-                    task.execute("http://10.0.2.2:8000/api/intervention");
+                    if (interventionList.get(i).isEstEnvoye() == 0) {
+                        AsyncPostJSONData task = new AsyncPostJSONData(interventionList.get(i).getMap());
+                        task.execute("http://10.0.2.2:8000/api/intervention");
 
-                    interventionListNonEnvoyees.get(i).setEstEnvoye(0);
-                    interventionmanager.updateIntervention(interventionListNonEnvoyees.get(i));
+                        interventionList.get(i).setEstEnvoye(1);
+                        interventionmanager.updateIntervention(interventionList.get(i));
+                        compteur ++;
+                    }
                 }
 
                 interventionmanager.close();
+
+                if (compteur > 0){
+                    Toast.makeText(getApplicationContext(), "Les interventions ont bien été envoyées", Toast.LENGTH_SHORT).show();
+                    compteur = 0;
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Aucune nouvelle intervention à ajouter", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
@@ -104,6 +116,7 @@ public class DataActivity extends AppCompatActivity implements com.example.inter
 
         //Puis on réajoute tout le contenu de la liste de la base
         interventionList.addAll(interventionmanager.getInterventions());
+
 
         interventionmanager.close();
 
@@ -133,7 +146,7 @@ public class DataActivity extends AppCompatActivity implements com.example.inter
         adapter.notifyDataSetChanged();
 
         //On utilise Toast (https://developer.android.com/reference/android/widget/Toast) et sa méthode makeText pour afficher le texte correspondant à l'élément cliqué.
-        Toast.makeText(this, "Vous avez cliqué sur " + adapter.getItem(position).getNomClient() + " " + adapter.getItem(position).getPrenomClient()  + " à la ligne " + position, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "Vous avez cliqué sur " + adapter.getItem(position).getNomClient() + " " + adapter.getItem(position).getPrenomClient()  + " à la ligne " + position, Toast.LENGTH_SHORT).show();
         // ou tout autre traitement de notre choix sur le clic
     }
 }

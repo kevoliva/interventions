@@ -89,7 +89,9 @@ public class InterventionManager {
         // valeur de retour : (int) nombre de lignes affectées par la requête
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NOM_CLIENT_INTERVENTION, intervention.getNomClient());
+        //values.put(KEY_NOM_CLIENT_INTERVENTION, intervention.getNomClient());
+        values.put(KEY_EST_ENVOYE_INTERVENTION, intervention.isEstEnvoye());
+
 
         String where = KEY_ID_INTERVENTION+" = ?";
         String[] whereArgs = {intervention.getId()+""};
@@ -144,42 +146,6 @@ public class InterventionManager {
 
         if (c.moveToFirst()) {
             //parcourt le curseur obtenu, jusqu'a la fin, et créer pour chaque enregistrement un objet Intervention
-            do {
-                Intervention a = new Intervention(0, 0,"","","","","","","","","", 0);
-                a.setId(c.getInt(c.getColumnIndex(KEY_ID_INTERVENTION)));
-                a.setUser_id(c.getInt(c.getColumnIndex(KEY_USER_ID_INTERVENTION)));
-                a.setNomClient(c.getString(c.getColumnIndex(KEY_NOM_CLIENT_INTERVENTION)));
-                a.setPrenomClient(c.getString(c.getColumnIndex(KEY_PRENOM_CLIENT_INTERVENTION)));
-                a.setAdresseClient(c.getString(c.getColumnIndex(KEY_ADRESSE_CLIENT_INTERVENTION)));
-                a.setMarqueChaudiere(c.getString(c.getColumnIndex(KEY_MARQUE_CHAUDIERE_INTERVENTION)));
-                a.setModeleChaudiere(c.getString(c.getColumnIndex(KEY_MODELE_CHAUDIERE_INTERVENTION)));
-                a.setDateMiseEnService(c.getString(c.getColumnIndex(KEY_DATE_MISE_EN_SERVICE_INTERVENTION)));
-                a.setDateIntervention(c.getString(c.getColumnIndex(KEY_DATE_INTERVENTION_INTERVENTION)));
-                a.setNumeroSerie(c.getString(c.getColumnIndex(KEY_NUMERO_SERIE_INTERVENTION)));
-                a.setDescription(c.getString(c.getColumnIndex(KEY_DESCRIPTION_INTERVENTION)));
-                a.setTempsPasse(c.getInt(c.getColumnIndex(KEY_TEMPS_PASSE_INTERVENTION)));
-                a.setEstEnvoye(c.getInt(c.getColumnIndex(KEY_EST_ENVOYE_INTERVENTION)));
-
-                // ajoute l'objet créé à la ArrayList de Intervention qui sera renvoyée.
-                interventionList.add(a);
-            }
-            while (c.moveToNext());
-        }
-        c.close();
-
-        return interventionList;
-    }
-
-    public ArrayList<com.example.intervention.Model.Entity.Intervention> getInterventionsNonEnvoyees() {
-
-        ArrayList<Intervention> interventionList = new ArrayList<Intervention>();
-
-
-        //récupère dans un curseur le résultat du select sur la table
-        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE estEnvoye=0 AND user_id="+ AsyncJSONData.idCompteConnecte, null);
-
-        if (c.moveToFirst()) {
-            //parcourt le curseur obtenu, jusqu'a la fin, et crée pour chaque enregistrement un objet Intervention
             do {
                 Intervention a = new Intervention(0, 0,"","","","","","","","","", 0);
                 a.setId(c.getInt(c.getColumnIndex(KEY_ID_INTERVENTION)));
