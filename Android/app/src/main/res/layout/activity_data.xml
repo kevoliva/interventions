@@ -28,11 +28,22 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/buttonSendInterventions"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="Envoyer les interventions" />
+
+            <Button
                 android:id="@+id/buttonAddData"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="Ajouter un contact" />
+                android:text="Ajouter une intervention" />
 
         </LinearLayout>
 

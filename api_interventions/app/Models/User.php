@@ -29,15 +29,17 @@ class User extends Authenticatable
     return $this->hasMany(Intervention::class);
   }
 
-  /**
-  * The attributes that should be hidden for arrays.
-  *
-  * @var array
-  */
-  protected $hidden = [
-    'password',
-    'remember_token',
-  ];
+// Cette partie est commentée pour pouvoir récupérer le mot de passe sur Android : MAUVAISE PRATIQUE, NON SECURISE
+
+  // /**
+  // * The attributes that should be hidden for arrays.
+  // *
+  // * @var array
+  // */
+  // protected $hidden = [
+  //   'password',
+  //   'remember_token',
+  // ];
 
   /**
   * The attributes that should be cast to native types.

@@ -1,5 +1,11 @@
 package com.example.intervention.Model.Entity;
 
+import com.example.intervention.MainActivity;
+import com.example.intervention.NetworkService.AsyncJSONData;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Intervention {
 
     private int id;
@@ -32,6 +38,23 @@ public class Intervention {
         this.description = description;
         this.tempsPasse = tempsPasse;
         this.estEnvoye = 0;
+    }
+
+    public Map<String, String> getMap(){
+        Map<String, String> interventionMap = new HashMap<>();
+        interventionMap.put("user_id", String.valueOf(AsyncJSONData.idCompteConnecte));
+        interventionMap.put("nomClient", this.nomClient);
+        interventionMap.put("prenomClient", this.prenomClient);
+        interventionMap.put("adresseClient", this.adresseClient);
+        interventionMap.put("marqueChaudiere", this.marqueChaudiere);
+        interventionMap.put("modeleChaudiere", this.modeleChaudiere);
+        interventionMap.put("dateMiseEnService", this.dateMiseEnService);
+        interventionMap.put("dateIntervention", this.dateIntervention);
+        interventionMap.put("numeroSerie", this.numeroSerie);
+        interventionMap.put("description", this.description);
+        interventionMap.put("tempsPasse", String.valueOf(this.tempsPasse));
+
+        return interventionMap;
     }
 
     public int getId() {
