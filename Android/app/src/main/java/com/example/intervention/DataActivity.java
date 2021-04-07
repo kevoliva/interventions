@@ -90,6 +90,10 @@ public class DataActivity extends AppCompatActivity implements com.example.inter
                     }
                 }
 
+                interventionList.clear();
+                interventionList.addAll(interventionmanager.getInterventions());
+                adapter.notifyDataSetChanged();
+
                 interventionmanager.close();
 
                 if (compteur > 0){

@@ -42,6 +42,12 @@ public class InterventionListAdapter extends RecyclerView.Adapter<InterventionLi
         holder.lenom.setText(lintervention.getNomClient());
         holder.leprenom.setText(lintervention.getPrenomClient());
         holder.ladate.setText(lintervention.getDateIntervention());
+        if (lintervention.isEstEnvoye() == 1){
+            holder.estEnvoye.setText("Envoyé");
+        }
+        else{
+            holder.estEnvoye.setText("Non envoyé");
+        }
     }
 
     // la méthode qui retourne le nombre total d'éléments dans la RV
@@ -73,6 +79,7 @@ public class InterventionListAdapter extends RecyclerView.Adapter<InterventionLi
         TextView lenom;
         TextView leprenom;
         TextView ladate;
+        TextView estEnvoye;
         ImageView lavatar;
 
         ViewHolder(View itemView) {
@@ -82,6 +89,7 @@ public class InterventionListAdapter extends RecyclerView.Adapter<InterventionLi
             leprenom = itemView.findViewById(R.id.tvValueSurname);
             ladate = itemView.findViewById(R.id.tvValueNum);
             lavatar = itemView.findViewById(R.id.tvAvatar);
+            estEnvoye = itemView.findViewById(R.id.tvEstEnvoye);
             // on ajoute au passage le listener pour le clic sur l'éléments
             itemView.setOnClickListener(this);
         }
