@@ -19,6 +19,7 @@ public class AjouterActivity extends AppCompatActivity {
     private EditText mNom, mPrenom, mAdresse, mMarqueChaudiere, mModeleChaudiere,
             mNumeroSerie, mDescription, mTempsPasse;
     private DatePicker mDateMES, mDateIntervention;
+    private Integer moisMES, moisIntervention, jourMES, jourIntervention;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +55,25 @@ public class AjouterActivity extends AppCompatActivity {
                 newIntervention.setAdresseClient(mAdresse.getText().toString());
                 newIntervention.setMarqueChaudiere(mMarqueChaudiere.getText().toString());
                 newIntervention.setModeleChaudiere(mModeleChaudiere.getText().toString());
-                String dateMiseEnService = mDateMES.getYear()+"-"+mDateMES.getMonth()+1+"-"+mDateMES.getDayOfMonth();
+                moisMES = Integer.valueOf(mDateMES.getMonth()+1);
+                moisIntervention = Integer.valueOf(mDateIntervention.getMonth()+1);
+                jourMES = mDateMES.getDayOfMonth();
+                jourIntervention = mDateIntervention.getDayOfMonth();
+                if (moisMES < 10) {
+                    moisMES = Integer.valueOf("0" + String.valueOf(moisMES));
+                }
+                if (moisIntervention < 10){
+                    moisIntervention = Integer.valueOf("0" + String.valueOf(moisIntervention));
+                }
+                if (jourMES < 10){
+                    jourMES = Integer.valueOf("0" + String.valueOf(jourMES));
+                }
+                if (moisIntervention < 10){
+                    jourIntervention = Integer.valueOf("0" + String.valueOf(jourIntervention));
+                }
+                String dateMiseEnService = mDateMES.getYear() + "-" + moisMES + "-" + jourMES;
                 newIntervention.setDateMiseEnService(dateMiseEnService);
-                String dateIntervention = mDateIntervention.getYear()+"-"+mDateIntervention.getMonth()+1+"-"+mDateIntervention.getDayOfMonth();
+                String dateIntervention = mDateIntervention.getYear() + "-" + moisIntervention + "-" + jourIntervention;
                 newIntervention.setDateIntervention(dateIntervention);
                 newIntervention.setNumeroSerie(mNumeroSerie.getText().toString());
                 newIntervention.setDescription(mDescription.getText().toString());

@@ -75,6 +75,7 @@ public class DataActivity extends AppCompatActivity implements com.example.inter
         mbuttonSendInterventions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                interventionmanager.open();
 
                 for(int i = 0 ; i < interventionListNonEnvoyees.size(); i++) {
                     Log.d("OK", String.valueOf(interventionListNonEnvoyees.get(i).isEstEnvoye()));
@@ -82,12 +83,12 @@ public class DataActivity extends AppCompatActivity implements com.example.inter
                     AsyncPostJSONData task = new AsyncPostJSONData(interventionListNonEnvoyees.get(i).getMap());
                     task.execute("http://10.0.2.2:8000/api/intervention");
 
-                    interventionmanager.open();
                     interventionListNonEnvoyees.get(i).setEstEnvoye(0);
                     interventionmanager.updateIntervention(interventionListNonEnvoyees.get(i));
-                    interventionmanager.close();
                 }
-                
+
+                interventionmanager.close();
+
             }
         });
     }
