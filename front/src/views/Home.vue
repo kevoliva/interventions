@@ -3,7 +3,7 @@
     <h1 class="text-center text-success">Techniciens</h1>
     <div class="row mt-5">
       <!-- Barre de recherche -->
-      <div class="input-group rounded mb-3">
+      <div class="input-group rounded mb-4">
         <input type="search" class="form-control rounded" v-model="searchQuery" placeholder="Nom du technicien..." aria-label="Search"
         aria-describedby="search-addon" />
         <span class="input-group-text border-0" id="search-addon">
@@ -13,14 +13,14 @@
       <table class="table table-striped">
         <thead class="table-success">
           <tr>
-            <th scope="col">Prénom & Nom</th>
-            <th scope="col">Email</th>
-            <th scope="col">Date d'inscription</th>
+            <th scope="col" @click="sort('name')">Prénom & Nom <i class="fas fa-sort"></i></th>
+            <th scope="col" @click="sort('email')">Email <i class="fas fa-sort"></i></th>
+            <th scope="col" @click="sort('created_at')">Date d'inscription <i class="fas fa-sort"></i></th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in filteredResources" :key="item.id">
+          <tr v-for="item in sortedUsers" :key="item.id">
             <td>{{ item.name }}</td>
             <td>{{ item.email }}</td>
             <td>{{ format_date(item.created_at) }}</td>
@@ -30,6 +30,16 @@
           </tr>
         </tbody>
       </table>
+      <div class="mt-3 text-center text-success">
+        <button class="btn btn-success mx-2" @click="prevPage">Précédent</button>
+        <button class="btn btn-success mx-2" @click="nextPage">Suivant</button>
+        <br> <br>
+        Tri sur la colonne : {{currentSort}}
+        <br>
+        Ordre : {{currentSortDir}}
+        <br>
+        Page : {{currentPage}}
+      </div>
     </div>
     <div v-if="loading" class="spinner-border text-success" role="status">
       <span class="sr-only">Loading...</span>
@@ -45,6 +55,10 @@ export default {
   data() {
     return {
       searchQuery: '',
+      currentSort:'name',
+      currentSortDir:'asc',
+      pageSize:4,
+      currentPage:1,
     }
   },
   computed: {
@@ -57,12 +71,38 @@ export default {
         return this.users;
       }
     },
+    sortedUsers:function() {
+      return this.users.sort((a,b) => {
+        let modifier = 1;
+        if(this.currentSortDir === 'desc') modifier = -1;
+        if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
+        if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
+        return 0;
+      }).filter((row, index) => {
+        let start = (this.currentPage-1)*this.pageSize;
+        let end = this.currentPage*this.pageSize;
+        if(index >= start && index < end) return true;
+      });
+    },
     ...mapState(['loading', 'users']),
   },
   mounted() {
     this.$store.dispatch('getUsers');
   },
   methods: {
+    nextPage:function() {
+      if((this.currentPage*this.pageSize) < this.users.length) this.currentPage++;
+    },
+    prevPage:function() {
+      if(this.currentPage > 1) this.currentPage--;
+    },
+    sort:function(s) {
+      //if s == current sort, reverse
+      if(s === this.currentSort) {
+        this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
+      }
+      this.currentSort = s;
+    },
     format_date(value) {
       if (value) {
         return moment(value).format("DD/MM/YYYY");
