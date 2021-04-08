@@ -25,6 +25,7 @@ class InterventionController extends Controller
   public function index()
   {
     return InterventionResource::collection(Intervention::all());
+    // return Intervention::all();
   }
 
   /**
