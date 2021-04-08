@@ -74,7 +74,7 @@ export default {
       }
     },
     sortedInterventions:function() {
-      return this.interventions.sort((a,b) => {
+      return this.filteredResources.sort((a,b) => {
         let modifier = 1;
         if(this.currentSortDir === 'desc') modifier = -1;
         if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
