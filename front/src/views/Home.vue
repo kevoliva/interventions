@@ -2,6 +2,7 @@
   <div class="container">
     <h1 class="text-center text-success">Techniciens</h1>
     <div class="row mt-5">
+
       <!-- Barre de recherche -->
       <div class="input-group rounded mb-4">
         <input type="search" class="form-control rounded" v-model="searchQuery" placeholder="Nom du technicien..." aria-label="Search"
@@ -10,6 +11,20 @@
           <i class="fas fa-search"></i>
         </span>
       </div>
+
+      <div class="mb-2 moitie">
+        <label for="dateDebut">Date de début</label>
+        <input type="date" class="form-control" v-model="startDate" id="dateDebut">
+      </div>
+      <div class="mb-4 moitie">
+        <label for="dateFin">Date de fin</label>
+        <input type="date" class="form-control" v-model="endDate" id="dateFin">
+      </div>
+
+      <div class="text-center mb-2">
+        <h5>Nombre de techniciens : {{ filteredDate.length }}</h5>
+      </div>
+
       <table class="table table-striped">
         <thead class="table-success">
           <tr>
@@ -20,7 +35,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in sortedUsers" :key="item.id">
+          <tr v-for="item in filteredDate" :key="item.id">
             <td>{{ item.name }}</td>
             <td>{{ item.email }}</td>
             <td>{{ format_date(item.created_at) }}</td>
@@ -59,6 +74,8 @@ export default {
       currentSortDir:'asc',
       pageSize:10,
       currentPage:1,
+      startDate: null,
+      endDate: null,
     }
   },
   computed: {
@@ -70,6 +87,19 @@ export default {
       }else{
         return this.users;
       }
+    },
+    filteredDate (){
+      var vm = this;
+      var startDate = vm.startDate;
+      var endDate = vm.endDate;
+      return _.filter(vm.sortedUsers, function (data) {
+        if ((_.isNull(startDate) && _.isNull(endDate))) {
+          return true;
+        } else {
+          var date = data.created_at;
+          return (date >= startDate && date <= endDate);
+        }
+      })
     },
     sortedUsers:function() {
       return this.filteredResources.sort((a,b) => {

@@ -10,6 +10,20 @@
           <i class="fas fa-search"></i>
         </span>
       </div>
+
+      <div class="mb-2 moitie">
+        <label for="dateDebut">Date de début</label>
+        <input type="date" class="form-control" v-model="startDate" id="dateDebut">
+      </div>
+      <div class="mb-4 moitie">
+        <label for="dateFin">Date de fin</label>
+        <input type="date" class="form-control" v-model="endDate" id="dateFin">
+      </div>
+
+      <div class="text-center mb-2">
+        <h5>Nombre d'interventions : {{ filteredDate.length }}</h5>
+      </div>
+
       <table class="table table-striped">
         <thead class="table-success">
           <tr>
@@ -21,7 +35,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in sortedInterventions" :key="item.id">
+          <tr v-for="item in filteredDate" :key="item.id">
             <td>{{ item.nomClient }}</td>
             <td>{{ item.prenomClient }}</td>
             <td>{{ item.adresseClient }}</td>
@@ -61,6 +75,8 @@ export default {
       currentSortDir:'asc',
       pageSize:10,
       currentPage:1,
+      startDate: null,
+      endDate: null,
     }
   },
   computed: {
@@ -72,6 +88,19 @@ export default {
       }else{
         return this.interventions;
       }
+    },
+    filteredDate (){
+      var vm = this;
+      var startDate = vm.startDate;
+      var endDate = vm.endDate;
+      return _.filter(vm.sortedInterventions, function (data) {
+        if ((_.isNull(startDate) && _.isNull(endDate))) {
+          return true;
+        } else {
+          var date = data.created_at;
+          return (date >= startDate && date <= endDate);
+        }
+      })
     },
     sortedInterventions:function() {
       return this.filteredResources.sort((a,b) => {

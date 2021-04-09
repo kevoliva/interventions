@@ -5,3 +5,12 @@ a {
 a:hover {
   color: #198754;
 }
+
+.search {
+  border: 1px;
+  border-radius: 50px;
+}
+
+.moitie {
+  width: 50%;
+}
