@@ -24,8 +24,8 @@
       <router-view v-slot="{ Component }">
         <transition
         mode="out-in"
-        enter-active-class="animate__flipInY"
-        leave-active-class="animate__flipOutX">
+        enter-active-class=""
+        leave-active-class="animate__animated animate__backOutLeft">
         <component :is="Component" />
       </transition>
     </router-view>

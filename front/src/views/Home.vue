@@ -12,11 +12,11 @@
         </span>
       </div>
 
-      <div class="mb-2 moitie">
+      <div class="mb-2 moitie animate__animated animate__lightSpeedInLeft">
         <label for="dateDebut">Date de début</label>
         <input type="date" class="form-control" v-model="startDate" id="dateDebut">
       </div>
-      <div class="mb-4 moitie">
+      <div class="mb-4 moitie animate__animated animate__lightSpeedInRight">
         <label for="dateFin">Date de fin</label>
         <input type="date" class="form-control" v-model="endDate" id="dateFin">
       </div>
