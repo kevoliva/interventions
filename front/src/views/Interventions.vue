@@ -59,7 +59,7 @@ export default {
       searchQuery: '',
       currentSort:'name',
       currentSortDir:'asc',
-      pageSize:3,
+      pageSize:10,
       currentPage:1,
     }
   },
